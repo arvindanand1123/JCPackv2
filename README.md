@@ -6,3 +6,5 @@ Configure Server: `python3 handler.py config [Server Zip File]`
 Run Server: `python3 handler.py runserver`
 
 Data backup: `python3 handler.py databackup`
+
+Kill spawned processed: `python3 handler.py nuke`
