@@ -19,32 +19,41 @@ def save_processes():
     pickle.dump(processes, running_processes)
     running_processes.close()
 
-
 def load_processes():
-    running_processes
+    running_processes = open('processes', 'rb')
+    processes = pickle.load(running_processes)
+    running_processes.close()
 
 def runserver():
     #SET UP/CLEAR
     server_cmd = 'java -Xmx8g -Xms4g -jar ' + fserver
-    os.remove('server_log.txt')
-    os.remove('server_err.txt')
+    try:
+        os.remove('server_log.txt')
+        os.remove('server_err.txt')
+    except:
+        pass
     server_log = open('server_log.txt', 'a')
     server_err = open('server_err.txt', 'a')
     
     #RUN PROCESS
     sproc = subprocess.Popen(server_cmd, stdout=server_log, stderr=server_err, shell=True)
-    processes.append(sproc)
-
+    processes.append(sproc.pid)
+    print("server pid = ", sproc.pid)
     #SAVE STATE
     save_processes()
 
-
-
-
 def nuke():
-    print("todo")
-
-
+    try:
+        load_processes()
+        print("loading")
+        print(processes)
+        for p in processes:
+            print("Killing ", p) 
+            os.kill(p, signal.SIGTERM)
+            processes.remove(p)
+        save_processes()
+    except:
+        print("No processes found/spawned")
 
 def main():
     ps = sys.argv[1]
