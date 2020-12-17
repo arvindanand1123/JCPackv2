@@ -21,7 +21,6 @@ def kill(proc_pid):
         proc.kill()
     process.kill()
 
-
 def runserver():
     #SET UP/CLEAR
     server_cmd = 'java -Xmx8g -Xms4g -jar ' + fserver
@@ -40,17 +39,6 @@ def runserver():
     processes.insert({'process':'server', 'pid':sproc.pid})
 
 def nuke():
-#    try:
-#        load_processes()
-#        print("loading")
-#        print(processes)
-#        for p in processes:
-#            print("Killing ", p) 
-#            os.kill(p, signal.SIGTERM)
-#            processes.remove(p)
-#        save_processes()
-#    except:
-#        print("No processes found/spawned")
     running = processes.all()
     if(running):
         for p in running:
