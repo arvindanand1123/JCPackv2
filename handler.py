@@ -18,7 +18,10 @@ def config(s):
 def kill(proc_pid):
     process = psutil.Process(proc_pid)
     for proc in process.children(recursive=True):
-        proc.kill()
+        try:
+            proc.kill()
+        except:
+            print("Failed to kill ", proc)
     process.kill()
 
 def runserver():
@@ -38,6 +41,21 @@ def runserver():
     #SAVE STATE
     processes.insert({'process':'server', 'pid':sproc.pid})
 
+def backup(secret):
+    #SET UP/CLEAR
+    script = "python3 backup.py "  + secret
+    try:
+        os.remove('backup.out')
+    except:
+        pass
+    backup_log = open('backup.out', 'a')
+    
+    #RUN PROCESS
+    sproc = subprocess.Popen(script, stdout=backup_log, shell=True)
+    print("backup pid = ", sproc.pid)
+    #SAVE STATE
+    processes.insert({'process':'backup', 'pid':sproc.pid})
+
 def nuke():
     running = processes.all()
     if(running):
@@ -56,9 +74,8 @@ def main():
         config(sys.argv[2])
     elif(ps == "runserver" or  ps == "preet"):
         runserver()
-    elif(ps == "backup"):
-        #todo
-        print("todo")
+    elif(ps == "databackup"):
+        backup(sys.argv[2])
     elif(ps == "nuke"):
         nuke()
 main()
