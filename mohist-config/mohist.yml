@@ -53,7 +53,7 @@ mohist:
 eventCanceled:
   explosion: false
   keepLevel: false
-  keepInventory: false
+  keepInventory: true
 consolecolor:
   info-time: b
   trace-level: c
