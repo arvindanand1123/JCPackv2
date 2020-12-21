@@ -16,6 +16,7 @@ forge:
     - 0
     - 1
     - -1
+    - 2
   modswhitelist:
     kickmessage: Use of unauthorized mods
     list: minecraft@1.12.2,mcp@9.42,FML@8.0.99.99
@@ -53,7 +54,7 @@ mohist:
 eventCanceled:
   explosion: false
   keepLevel: false
-  keepInventory: false
+  keepInventory: true
 consolecolor:
   info-time: b
   trace-level: c
