@@ -11,7 +11,7 @@ world:
   dimensionsNotLoaded: []
 forge:
   autounloadworld:
-    enable: true
+    enable: false
     whitelist:
     - 0
     - 1

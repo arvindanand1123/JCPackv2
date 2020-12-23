@@ -26,7 +26,7 @@ def kill(proc_pid):
 
 def runserver():
     #SET UP/CLEAR
-    server_cmd = 'java -Xmx8g -Xms4g -jar ' + fserver
+    server_cmd = 'java -Xmx12g -Xms4g -jar ' + fserver
     try:
         os.remove('server_log.txt')
         os.remove('server_err.txt')
